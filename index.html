@@ -1,63 +1,175 @@
-<!DOCTYPE html>
-
 <html>
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<head><title>517点</title>
+<script language=javascript>
+var checkInput=function(){
 
-  <title>Spoon-Knife</title>
-  <style type="text/css">
-    * {
-      margin:0px;
-      padding:0px;
-    }
-    
-    #octocat {
-      display: block;
-      width:384px;
-      margin: 50px auto;
-    }
-    
-    p {
-      display: block;
-      width: 400px;
-      margin: 50px auto;
-      font: 30px Monaco,"Courier New","DejaVu Sans Mono","Bitstream Vera Sans Mono",monospace;
-    }
-    #rainbow-message {
-      position: absolute;
-      right: 10px;
-      top: 10px;
-      box-shadow: -5px 10px 15px gray;
-      -moz-box-shadow: -5px 10px 15px gray;
-      font-family: sans-serif;
-    }
-    
-  </style>
-  <script type="text/javascript">
-	var keyCodes=new Array(10);
-	var pattern=[38,38,40,40,37,39,37,39,66,65];
-	function keydownHandler(e){
-		keyCodes.shift();
-		keyCodes.push(e.keyCode);
-		if(keyCodes.every(function(element, index, array){return element===pattern[index];})){
-			document.getElementById("rainbow-message").style.display="";
-		}
-	}
-	window.onkeydown=keydownHandler;
-   </script>
-		
+
+var no1 = parseFloat(document.forms['form']['no1'].value);
+var no2 = parseFloat(document.forms['form']['no2'].value);
+var no3 = parseFloat(document.forms['form']['no3'].value);
+var no4 = parseFloat(document.forms['form']['no4'].value);
+if(isNaN(no1)||no1<=0||no1>=100){
+alert("第一个数字非法！,应该输入大于0小于100的数字！");
+return;
+}else if(isNaN(no2)||no2<=0||no2>=100){
+alert("第二个数字非法！,应该输入大于0小于100的数字！");
+return;
+}else if(isNaN(no2)||no2<=0||no2>=100){
+alert("第三个数字非法！,应该输入大于0小于100的数字！");
+return;
+}else if(isNaN(no2)||no2<=0||no2>=100){
+alert("第四个数字非法！,应该输入大于0小于100的数字！");
+return;
+}else{
+calc24([no1,no2,no3,no4]);
+} 
+};
+
+
+var calc24=function(nums){
+var sign = ['+','-','*','/'];
+var expr = new Array(8);
+for(i=0;i<4;i++){
+for(j=0;j<4;j++){
+for(k=0;k<4;k++){
+for(m=0;m<4;m++){
+for(n=0;n<4;n++){
+if(n==m){
+continue;
+}
+for(p=0;p<4;p++){
+if(p==m||p==n){
+continue;
+}
+for(q=0;q<4;q++){
+if(q==m||q==n||q==p){
+continue;
+}
+expr[1]=sign[i];
+expr[6]=nums[p];
+expr[7]=nums[q];
+
+
+expr[0] = 1;
+expr[2]=sign[j];
+expr[3]=sign[k];
+expr[4]=nums[m];
+expr[5]=nums[n];
+//if(eval(expr)==24){
+if(Math.abs(eval(expr)-517)<0.0000001){
+expr[0] = 1;
+alert(tostring(expr)+'=517');
+return;
+}
+expr[0] = 1;
+expr[2]=sign[j];
+expr[3]=nums[m];
+expr[4]=sign[k];
+expr[5]=nums[n];
+//if(eval(expr)==24){
+if(Math.abs(eval(expr)-517)<0.0000001){
+expr[0] = 1;
+alert(tostring(expr)+'=517');
+return;
+}
+expr[0] = 1;
+expr[2]=sign[j];
+expr[3]=nums[m];
+expr[4]=nums[n];
+expr[5]=sign[k];
+//if(eval(expr)==24){
+if(Math.abs(eval(expr)-517)<0.0000001){
+expr[0] = 1;
+alert(tostring(expr)+'=517');
+return;
+}
+expr[0] = 1;
+expr[2]=nums[m];
+expr[3]=sign[j];
+expr[4]=sign[k];
+expr[5]=nums[n];
+//if(eval(expr)==24){
+if(Math.abs(eval(expr)-517)<0.0000001){
+expr[0] = 1;
+alert(tostring(expr)+'=517');
+return;
+}
+expr[0] = 1;
+expr[2]=nums[m];
+expr[3]=sign[j];
+expr[4]=nums[n];
+expr[5]=sign[k];
+//if(eval(expr)==24){
+if(Math.abs(eval(expr)-517)<0.0000001){
+expr[0] = 1;
+alert(tostring(expr)+'=517');
+return;
+}
+}
+}
+}
+} 
+}
+}
+}
+alert('无解！'); 
+};
+
+
+var eval=function(expr){
+var i = expr[0];
+expr[0]++;
+if(!isNaN(expr[i])){
+return expr[i];
+}
+if(expr[i]=='+'){
+return eval(expr)+eval(expr);
+}else if(expr[i]=='-'){
+return eval(expr)-eval(expr);
+}else if(expr[i]=='*'){
+return eval(expr)*eval(expr);
+}else if(expr[i]=='/'){
+return eval(expr)/eval(expr);
+}else{
+alert('error!');
+}
+};
+
+
+var tostring=function(expr){
+var i = expr[0];
+expr[0]++;
+if(!isNaN(expr[i])){
+return expr[i];
+}else{
+if(i>1){
+return ('('+tostring(expr)+expr[i]+tostring(expr)+')');
+}else{
+return (tostring(expr)+expr[i]+tostring(expr));
+}
+}
+};
+</script>
 </head>
-
 <body>
-
-<img src="forkit.gif" id="octocat" alt="" />
-
-<p>
-  Fork me? No, fork you!
-</p>
-<div id="rainbow-message" style="display:none">
-Double repositories all the way across the sky!<br/>
-<a href="http://help.github.com/fork-a-repo/">What does it mean?</a>
-</div>
+<form id="form" name="form">
+<table>
+<tr width="200">
+<td width="100">第一个数：</td><td widht="130"><input id="no1" name="no1" size="5"></td>
+</tr>
+<tr width="200">
+<td width="100">第二个数：</td><td widht="130"><input id="no2" name="no2" size="5"></td>
+</tr>
+<tr width="200">
+<td width="100">第三个数：</td><td widht="130"><input id="no3" name="no3" size="5"></td>
+</tr>
+<tr width="200">
+<td width="100">第四个数：</td><td widht="130"><input id="no4" name="no4" size="5"></td>
+</tr>
+<tr width="200">
+<td colspan="2"><input type="button" name="button" value="计算" onclick="javascript:checkInput();"></td>
+</tr>
+</table>
+</form>
 </body>
 </html>
